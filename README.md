@@ -42,7 +42,37 @@ thresIMG = cv2.threshold(grayIMG, 120,255,cv2.THRESH_BINARY)[1]
 cv2.imwrite('thresholdIMG.jpg', thresIMG)
 
 
+import cv2
+img1=cv2.imread('baby.jpg')
+cv2.imshow('Logo',img1)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
+
+
+import cv2
+img1=cv2.imread('baby.jpg')
+negative_image=255-img1
+cv2.imshow("Original Image", img1)
+cv2.imshow("Negative Image", negative_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+import cv2
+import numpy as np
+
+img2=cv2.imread('baby.jpg', cv2.IMREAD_GRAYSCALE)
+c=255.0
+
+log_transformed_image=c*log1p(img2)
+log_transformed_image=np.unit8(log_transformed_image)
+
+cv2.imshow('Original Image',img2)
+cv2.imshow('Log Transformed Image', log_transformed_image)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 ```
 
 
