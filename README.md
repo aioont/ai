@@ -159,11 +159,29 @@ relies on specific features of the flows described in Table 1.
 (2) Heuristic-based detection rules. This type of detection
 relies on the analysis of multiple flows and uses heuristics
 based on their properties
-
-Our detection logic maintains a
+Example 3.1. For the feature-based rules, we consider the MITRE
+ATT&CK technique T1571 (Non-Standard Port). This technique is
+part of the “Command and Control” (C&C) tactic and is applicable
+to the case when a host attempts to communicate with another
+host using standard network protocols but on a non-default port.
+Malware can attempt such a connection for several reasons—to
+communicate using a random port, evade firewall rules blocking
+certain default ports, or to find an open port for the purpose of
+establishing a C&C channel, among others. In order to detect this
+technique we rely on the features of the flow the two hosts use to
+communicate with each other. Specifically, we compare the network
+protocol in the flow with the port(s) used during communication
+and determine if these correspond to their defaults. In order to
+do this, we utilise YAF during the Ingestion Processing phase to
+determine the application layer protocol of every flow independent
+of the port used. This feature is extracted and stored in our graph
+as the flow property applabel. Our detection logic maintains a
 list of the 50 most popular application layer protocols and their
 corresponding default ports, and compares these to the features
-of applabel and port present in every flow. 
+of applabel and port present in every flow. A mismatch between
+these features is a positive match for T1571.
+
+
 
 
 
